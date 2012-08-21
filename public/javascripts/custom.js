@@ -2,7 +2,7 @@
 this.tooltip = function(){xOffset = -10;yOffset = 10;jQuery.noConflict();jQuery(".tooltip").hover(function(e){this.t = this.title;this.title = "";jQuery("body").append("<p class='itooltip'>"+ this.t +"</p>");jQuery(".itooltip").css("top",(e.pageY - xOffset) + "px").css("left",(e.pageX + yOffset) + "px").fadeIn(500);},function(){this.title = this.t; jQuery(".itooltip").remove();});jQuery("a.tooltip").mousemove(function(e){jQuery(".itooltip").css("top",(e.pageY - xOffset) + "px").css("left",(e.pageX + yOffset) + "px");});};
 //END TOOLTIP
 
-jQuery.noConflict(); jQuery(document).ready(function(){
+$(document).ready(function(){
 
 	tooltip();
 	
@@ -178,36 +178,6 @@ jQuery.noConflict(); jQuery(document).ready(function(){
 		});
 	}
 	
-	//FORM STUFF...
-	jQuery("#contactform #submit_btn").click(function() {  
-		
-	var normalborder = "1px solid #3a3a3a",
-		normalbackground = "#333",
-		normalcolor = "#fff",
-		errorborder = "1px solid red",
-		errorbackground = "#ffd3c9",
-		errorcolor = "#333";  		
-	    
-	    jQuery("#contactform .input, #contactform textarea").css({border:normalborder, background:normalbackground, color:normalcolor});
-	    		
-		var name = jQuery("#contactform input#name");
-		if (name.val() == "") {
-			name.focus().css({border:errorborder, background:errorbackground, color:errorcolor});
-			return false;
-		}
-		var email = jQuery("#contactform input#email");
-		if (email.val() == "") {
-	      	email.focus().css({border:errorborder, background:errorbackground, color:errorcolor});
-	     	return false;
-		}		
-		var message = jQuery("#contactform textarea#message");
-		if (message.val() == "") {
-	      	message.focus().css({border:errorborder, background:errorbackground, color:errorcolor});
-	     	return false;
-		}
-	});
-
-
   //FROM HTML
     	//MAP ZOOM (0 to 20)
     	var zoomLevel = 3,

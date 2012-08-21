@@ -637,21 +637,6 @@ ul.galleryBox li:hover {border-color: #fff;}
 .toggleButton:hover {color: #000;background: #99b3cc}
 .toggleButton span {float: right;}
 
-#commentsection {width:300px;   font-size: 11px; display: none; margin: 15px 0;}
-.commentlist {width: 100%; list-style:none; }
-h3.comments {margin:40px auto 20px;}
-.commentlist li,#commentform input,#commentform textarea {font:.9em 'Lucida Grande', Verdana, Arial, Sans-Serif;}
-.commentlist li {font-weight:bold;list-style:none; padding:15px 0; font-size:11px;}
-.commentlist li img.avatar {float:left;margin-right:23px;}
-.commentlist cite,.commentlist cite a {font-weight:bold;font-style:normal;}
-.commentlist p {font-weight:normal; text-transform:none; margin:10px 5px 10px 53px; font-size: 11px;}
-.commentlist .pingback p {margin:10px 5px 10px;}
-#commentform p {margin:5px 0;}
-.commentmetadata {font-weight:normal;display:block; font-size:9px; padding:3px 0 0; text-transform:uppercase;}
-cite.fn {text-transform:uppercase;}
-.commentlist {padding:0 0 40px;}
-.nocomments {text-align:center;}
-
 /*---FORM STUFF---*/
 input[type="text"],input[type="password"] {padding: 5px; width:150px;  }
 textarea {padding: 4px; width:292px; height: 120px; font-family: "Sans-serif"; font-size: 11px;}
@@ -667,20 +652,6 @@ textarea {
 	-webkit-border-radius: 3px; 
 	border-radius: 3px;
 }
-
-#commentform input[type="submit"], 
-input[type="submit"] {
-	cursor: pointer; 
-	border: none; 
-	display: block; 
-	background: #99b3cc;
-	padding: 3px 8px;
-	-moz-border-radius: 3px;
-	-webkit-border-radius: 3px; 
-	border-radius: 3px;
-}
-#commentform input[type="submit"]:hover, 
-input[type="submit"]:hover {background:#333; color: #fff;}
 
 #sidebar #searchform {padding: 0 0 10px;}
 #sidebar input, #sidebar textarea {padding:3px}
