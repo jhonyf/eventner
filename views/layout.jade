@@ -19,6 +19,5 @@ html(lang="en-US", lang="en-US", dir="ltr")
       var socket = io.connect('http://localhost:3000');
       socket.on('incoming', function (data) {
         add(jQuery(gMap), data.email, "reclipit.com", "Trial notification", data.lat, data.lng);
-        jQuery('.marker:first-child').addClass('activeMarker').mouseover();
       });
   body!= body

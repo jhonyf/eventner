@@ -69,39 +69,10 @@ $(document).ready(function(){
 	
 	//GMAP STUFF
 	gMap.css({height:containerHeight, width:"100%"});
-	
-        //NEXT MARKER 
-        jQuery('#nextMarker').live('click', function(){
-        	var activeMarker = jQuery('.activeMarker');
-        	if(activeMarker.is(':not(:last-child)')){
-        		activeMarker.removeClass('activeMarker').next('.marker').addClass('activeMarker').mouseover();
-        	} else {
-        		activeMarker.removeClass('activeMarker');
-        		jQuery('.marker:first-child').addClass('activeMarker').mouseover();
-        	}
-        });
-        //PREV MARKER
-        jQuery('#prevMarker').live('click', function(){
-        	var activeMarker = jQuery('.activeMarker');
-        	if(activeMarker.is(':not(:first-child)')){
-        		activeMarker.removeClass('activeMarker').prev('.marker').addClass('activeMarker').mouseover();
-        	} else {
-        		activeMarker.removeClass('activeMarker');
-        		jQuery('.marker:last-child').addClass('activeMarker').mouseover();
-        	}      
-        });
-       	//HOVER
-        marker.live('mouseover', function(){
-        	jQuery('.activeInfo').removeClass('activeInfo').hide();
-        	jQuery(this).siblings('.marker').removeClass('activeMarker');
-        	jQuery(this).addClass('activeMarker').children('.markerInfo').addClass('activeInfo').stop(true, true).show();
-        	jQuery("#target").show();
-        });
         //TARGET HOVER
         jQuery("#target").live('mouseover',function(){
         	jQuery(this).hide();
         });
-              
     //MAP TYPE
     jQuery(".roadmap").live('click',function(){
     	jQuery("#gMap").gmap3({action: 'setOptions', args:[{mapTypeId:'roadmap'}]}); //hybrid, satellite, roadmap, terrain
@@ -248,10 +219,6 @@ $(document).ready(function(){
        			mouseover: function(marker){
           			jQuerythis.css({cursor:'pointer'});
           			jQuery('#markerTitle'+i+'').fadeIn({ duration: 200, queue: false }).animate({bottom:"32px"},{duration:200,queue:false});
-          			jQuery('.markerInfo').removeClass('activeInfo').hide();
-          			jQuery('#markerInfo'+i+'').addClass('activeInfo').show();
-          			jQuery('.marker').removeClass('activeMarker');
-          			jQuery('#marker'+i+'').addClass('activeMarker');
       			},
        			mouseout: function(){
           			jQuerythis.css({cursor:'default'});
@@ -260,18 +227,12 @@ $(document).ready(function(){
       			click: function(marker){window.location = link}
    			},
             callback: function(marker){
-              var jQuerybutton = jQuery('<div id="marker'+i+'" class="marker"><div id="markerInfo'+i+'" class="markerInfo"><a href="'+link+'">LINK</a><h2><a href="'+link+'">'+title+'</a></h2><p>'+excerpt+'</p><a class="markerLink" href="'+link+'">View Details &rarr;</a><div class="markerTotal">'+i+' / <span></span></div></div></div>');
-              console.log(jQuerybutton);
-              jQuerybutton.mouseover(function(){
-                  jQuerythis.gmap3({
-                    action:'panTo', 
-                    args:[marker.position]
-                  });
-                  jQuery("#target").stop(true,true).fadeIn(1200).delay(500).fadeOut(1200);
-               });
-              jQuery('#markers').append(jQuerybutton);
-              var numbers = jQuery(".markerInfo").length;
-              jQuery(".markerTotal span").html(numbers);
+              jQuerythis.gmap3({
+                action:'panTo', 
+                args:[marker.position]
+              });
+              jQuery("#target").stop(true,true).fadeIn(1200).delay(500).fadeOut(1200);
+
               jQuerythis.gmap3({
               	action:'addOverlay',
               	content: '<div id="markerTitle'+i+'" class="markerTitle">'+title+'</div>',
