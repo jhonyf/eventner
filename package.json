@@ -1,5 +1,5 @@
 {
-    "name": "application-name"
+    "name": "eventner"
   , "version": "0.0.1"
   , "private": true
   , "dependencies": {
@@ -7,5 +7,6 @@
     , "sass": ">= 0.0.1"
     , "jade": ">= 0.0.1"
     , "mongodb": ">=0.9.6-7"
+    , "socket.io": "0.8.5"
   }
 }
