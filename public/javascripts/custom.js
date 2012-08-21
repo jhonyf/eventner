@@ -3,7 +3,6 @@ this.tooltip = function(){xOffset = -10;yOffset = 10;jQuery.noConflict();jQuery(
 //END TOOLTIP
 
 $(document).ready(function(){
-
 	tooltip();
 	
 	//LOADING ANIMATION
@@ -212,9 +211,9 @@ $(document).ready(function(){
                 jQuery(this).gmap3({
                   action:'getBounds', 
                   callback: function (){
-//ADD MARKERS HERE - FORMAT IS AS FOLLOWS...
-//add(jQuery(this), number += 1, "NAME", "URL","ADDRESS1<br />ADDRESS2","LATITUDE","LONGITUDE");
-add(jQuery(this), number += 1, "This is the first ping", "github.com", "Trial notification","41.890202","12.492228");
+                    //ADD MARKERS HERE - FORMAT IS AS FOLLOWS...
+                    //add(jQuery(this), number += 1, "NAME", "URL","ADDRESS1<br />ADDRESS2","LATITUDE","LONGITUDE");
+                    //add(jQuery(this), number += 1, "This is the first ping", "github.com", "Trial notification","41.890202","12.492228");
                   }
                 });
               }
@@ -235,7 +234,9 @@ add(jQuery(this), number += 1, "This is the first ping", "github.com", "Trial no
 				mapTypeId:'roadmap'
 			}]
 		});
-        function add(jQuerythis, i, title, link, excerpt, lati, longi){
+    var markerCount = 0;
+    add = function (jQuerythis, title, link, excerpt, lati, longi){
+          markerCount++;
           jQuerythis.gmap3({
             action : 'addMarker',
             lat:lati,
@@ -245,20 +246,20 @@ add(jQuery(this), number += 1, "This is the first ping", "github.com", "Trial no
             events:{
        			mouseover: function(marker){
           			jQuerythis.css({cursor:'pointer'});
-          			jQuery('#markerTitle'+i+'').fadeIn({ duration: 200, queue: false }).animate({bottom:"32px"},{duration:200,queue:false});
+          			jQuery('#markerTitle'+markerCount+'').fadeIn({ duration: 200, queue: false }).animate({bottom:"32px"},{duration:200,queue:false});
           			jQuery('.markerInfo').removeClass('activeInfo').hide();
-          			jQuery('#markerInfo'+i+'').addClass('activeInfo').show();
+          			jQuery('#markerInfo'+markerCount+'').addClass('activeInfo').show();
           			jQuery('.marker').removeClass('activeMarker');
-          			jQuery('#marker'+i+'').addClass('activeMarker');
+          			jQuery('#marker'+markerCount+'').addClass('activeMarker');
       			},
        			mouseout: function(){
           			jQuerythis.css({cursor:'default'});
-          			jQuery('#markerTitle'+i+'').stop(true,true).fadeOut(200,function(){jQuery(this).css({bottom:"0"})});
+          			jQuery('#markerTitle'+markerCount+'').stop(true,true).fadeOut(200,function(){jQuery(this).css({bottom:"0"})});
       			},
       			click: function(marker){window.location = link}
    			},
             callback: function(marker){
-              var jQuerybutton = jQuery('<div id="marker'+i+'" class="marker"><div id="markerInfo'+i+'" class="markerInfo"><a href="'+link+'">LINK</a><h2><a href="'+link+'">'+title+'</a></h2><p>'+excerpt+'</p><a class="markerLink" href="'+link+'">View Details &rarr;</a><div class="markerTotal">'+i+' / <span></span></div></div></div>');
+              var jQuerybutton = jQuery('<div id="marker'+markerCount+'" class="marker"><div id="markerInfo'+markerCount+'" class="markerInfo"><a href="'+link+'">LINK</a><h2><a href="'+link+'">'+title+'</a></h2><p>'+excerpt+'</p><a class="markerLink" href="'+link+'">View Details &rarr;</a><div class="markerTotal">'+markerCount+' / <span></span></div></div></div>');
               jQuerybutton.mouseover(function(){
                   jQuerythis.gmap3({
                     action:'panTo', 
@@ -269,16 +270,12 @@ add(jQuery(this), number += 1, "This is the first ping", "github.com", "Trial no
               jQuery('#markers').append(jQuerybutton);
               var numbers = jQuery(".markerInfo").length;
               jQuery(".markerTotal span").html(numbers);
-              if(i == 1){
-              	jQuery('.marker:first-child').addClass('activeMarker').mouseover();
-              }
               jQuerythis.gmap3({
               	action:'addOverlay',
-              	content: '<div id="markerTitle'+i+'" class="markerTitle">'+title+'</div>',
+              	content: '<div id="markerTitle'+markerCount+'" class="markerTitle">'+title+'</div>',
               	latLng: marker.getPosition()
                });
             }    		
           });
         }
-  
 });

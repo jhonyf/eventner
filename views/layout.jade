@@ -19,5 +19,7 @@ html(lang="en-US", lang="en-US", dir="ltr")
       var socket = io.connect('http://localhost:3000');
       socket.on('incoming', function (data) {
         console.log(data);
+        add(jQuery(gMap), "This is the first ping", "github.com", "Trial notification","41.890202","12.492228");
+        jQuery('.marker:first-child').addClass('activeMarker').mouseover();
       });
   body!= body
