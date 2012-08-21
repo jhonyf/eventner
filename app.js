@@ -34,20 +34,18 @@ app.configure('production', function(){
 // Routes
 app.get('/', function(req, res){
   res.render('index', {
-    title: 'Express'
   });
 });
 
-app.get('/ipn', function(req, res){
-  for(var i in global_sockets) {
-    global_sockets[i].emit('news', { hello: 'world' + i });
-  }
-});
+app.post('/sendgrid/ipn', function(req, res){
+  params = req.body
+  email = params.email
 
-app.post('/ipn', function(req, res){
   for(var i in global_sockets) {
-    global_sockets[i].emit('news', { hello: 'world' + i });
+    global_sockets[i].emit('incoming', params);
   }
+  //post successful 200 back to sendgrid
+  res.send(200);
 });
 
 //IO server
@@ -58,6 +56,6 @@ io.sockets.on('connection', function(socket){
   });
 
 });
-  
+
 app.listen(3000);
-console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
+//console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);

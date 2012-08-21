@@ -17,26 +17,7 @@ html(lang="en-US", lang="en-US", dir="ltr")
     script(src="/socket.io/socket.io.js", type="text/javascript") 
     script
       var socket = io.connect('http://localhost:3000');
-  body
-    #gMap
-    #header
-      a#logo(name="logo", href="index.html") Eventner
-      h2#description Activity Monitor
-      #navigation
-        ul#dropmenu.menu
-          li.current-menu-item
-            a(href="index.html") Home
-            ul.sub-menu
-              li
-                a(href="#") View All
-    #loading
-    #contentContainer
-      #content!= body
-    #footer
-      #socialStuff
-        a#facebookIcon.socialicon(name="facebookIcon", rel="nofollow", title="Facebook", href="#")
-        a#twitterIcon.socialicon(name="twitterIcon", rel="nofollow", title="Follow on Twitter", href="#")
-      #copyright
-        | &copy; 2012 CityPockets Inc. Map by Google.
-      .pageContent
-        h2 Page Title Here
+      socket.on('incoming', function (data) {
+        console.log(data);
+      });
+  body!= body
