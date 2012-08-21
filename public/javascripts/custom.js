@@ -236,6 +236,7 @@ $(document).ready(function(){
 		});
     var markerCount = 0;
     add = function (jQuerythis, title, link, excerpt, lati, longi){
+          var i = markerCount;
           markerCount++;
           jQuerythis.gmap3({
             action : 'addMarker',
@@ -246,20 +247,21 @@ $(document).ready(function(){
             events:{
        			mouseover: function(marker){
           			jQuerythis.css({cursor:'pointer'});
-          			jQuery('#markerTitle'+markerCount+'').fadeIn({ duration: 200, queue: false }).animate({bottom:"32px"},{duration:200,queue:false});
+          			jQuery('#markerTitle'+i+'').fadeIn({ duration: 200, queue: false }).animate({bottom:"32px"},{duration:200,queue:false});
           			jQuery('.markerInfo').removeClass('activeInfo').hide();
-          			jQuery('#markerInfo'+markerCount+'').addClass('activeInfo').show();
+          			jQuery('#markerInfo'+i+'').addClass('activeInfo').show();
           			jQuery('.marker').removeClass('activeMarker');
-          			jQuery('#marker'+markerCount+'').addClass('activeMarker');
+          			jQuery('#marker'+i+'').addClass('activeMarker');
       			},
        			mouseout: function(){
           			jQuerythis.css({cursor:'default'});
-          			jQuery('#markerTitle'+markerCount+'').stop(true,true).fadeOut(200,function(){jQuery(this).css({bottom:"0"})});
+          			jQuery('#markerTitle'+i+'').stop(true,true).fadeOut(200,function(){jQuery(this).css({bottom:"0"})});
       			},
       			click: function(marker){window.location = link}
    			},
             callback: function(marker){
-              var jQuerybutton = jQuery('<div id="marker'+markerCount+'" class="marker"><div id="markerInfo'+markerCount+'" class="markerInfo"><a href="'+link+'">LINK</a><h2><a href="'+link+'">'+title+'</a></h2><p>'+excerpt+'</p><a class="markerLink" href="'+link+'">View Details &rarr;</a><div class="markerTotal">'+markerCount+' / <span></span></div></div></div>');
+              var jQuerybutton = jQuery('<div id="marker'+i+'" class="marker"><div id="markerInfo'+i+'" class="markerInfo"><a href="'+link+'">LINK</a><h2><a href="'+link+'">'+title+'</a></h2><p>'+excerpt+'</p><a class="markerLink" href="'+link+'">View Details &rarr;</a><div class="markerTotal">'+i+' / <span></span></div></div></div>');
+              console.log(jQuerybutton);
               jQuerybutton.mouseover(function(){
                   jQuerythis.gmap3({
                     action:'panTo', 
@@ -272,10 +274,10 @@ $(document).ready(function(){
               jQuery(".markerTotal span").html(numbers);
               jQuerythis.gmap3({
               	action:'addOverlay',
-              	content: '<div id="markerTitle'+markerCount+'" class="markerTitle">'+title+'</div>',
+              	content: '<div id="markerTitle'+i+'" class="markerTitle">'+title+'</div>',
               	latLng: marker.getPosition()
                });
-            }    		
+            }
           });
         }
 });

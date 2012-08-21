@@ -39,10 +39,10 @@ app.get('/', function(req, res){
 
 app.post('/sendgrid/ipn', function(req, res){
   params = req.body
-  email = params.email
+  packet = {email: params.email, event: params.event, lat: randomLatLng(15, 60), lng: randomLatLng(-120, 120)}
 
   for(var i in global_sockets) {
-    global_sockets[i].emit('incoming', params);
+    global_sockets[i].emit('incoming', packet);
   }
   //post successful 200 back to sendgrid
   res.send(200);
@@ -56,6 +56,10 @@ io.sockets.on('connection', function(socket){
   });
 
 });
+
+function randomLatLng(from, to) {
+  return (Math.random() * (to - from) + from).toFixed(5);
+}
 
 app.listen(3000);
 //console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
